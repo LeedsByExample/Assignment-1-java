@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by LaunchCode
@@ -75,7 +76,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
@@ -94,8 +95,25 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
+        //create an array list of a hash map of jobs? maybe??
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for (HashMap<String, String> job : allJobs) {
+            //for each job/row in allJobs, search for value; if job contains value, add to jobs
+            for (Map.Entry<String,String> jobField : job.entrySet()) {
+
+                //don't add job to jobs multiple times if it contains value multiple times
+                //also make case-insensitive
+                //QUESTION: why does intellij get mad at me when i try to put !jobs.contains(job) in as a check
+                if (jobField.getValue().toLowerCase().contains(value.toLowerCase()) && !jobs.contains(job)) {
+                        jobs.add(job);
+                }
+            }
+
+        }
+
         // TODO - implement this method
-        return null;
+        return jobs;
     }
 
     /**

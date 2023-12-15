@@ -66,6 +66,7 @@ public class TechJobs {
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
+
             }
         }
     }
@@ -119,7 +120,31 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        if (someJobs.isEmpty()) {
+            System.out.print("No Results");
+        } else {
+            for (HashMap<String, String> job : someJobs) {
+                //do something else here ig
+                System.out.println("\n*****");
+                for (Map.Entry<String, String> item : job.entrySet()) {
+                    System.out.println(item.getKey() + ": " + item.getValue());
+                }
+                System.out.println("*****");
+            }
+        }
 
-        System.out.println("printJobs is not implemented yet");
+        //System.out.println("printJobs is not implemented yet"); Finish your work next time, Blake. We're tired of picking up the slack for you around here. Mr. Hashimoto will have your ass if this happens again.
     }
 }
+/*
+*****
+position type: Data Scientist / Business Intelligence
+name: Sr. IT Analyst (Data/BI)
+employer: Bull Moose Industries
+location: Saint Louis
+core competency: Statistical Analysis
+*****
+
+iterate over an ArrayList of jobs. Each job is itself a HashMap. creating a nested loop to loop over each HashMap
+
+ */
